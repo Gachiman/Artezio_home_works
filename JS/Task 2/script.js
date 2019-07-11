@@ -37,8 +37,27 @@ function buttonClick() {
                     prod *= i;
             }
             resultDiv.appendChild(document.createTextNode("Product numbers from X1 to X2 = " + prod));
+        } else if (rad[3].checked) {
+            if (x1 > x2)
+                [x1, x2] = [x2, x1];
+            var i = x1, arr = [];
+            if (x1 < 2)
+                i = 2;
+            for (var j = i, i = 0; j <= x2; j++) {
+                if (isSimple(j))
+                    arr[i++] = j;
+            }
+            resultDiv.appendChild(document.createTextNode("Prime numbers in [X1 ; X2] = " + arr));
         }
     }
+}
+
+function isSimple(number) {
+    for (var i = 2; i < number; i++) {
+        if (number % i == 0)
+            return false;
+    }
+    return true;
 }
 
 function buttonClick_2_4() {
