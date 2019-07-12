@@ -36,6 +36,7 @@ function squareClick(number) {  // Обрабатывает нажатие
         } else {  // Отгадали
             winArray.push(number);
             winArray.push(prevNum);
+            flag = false;
         }
         prevNum = -1;
     }
