@@ -11,28 +11,33 @@ function mixArray(array) {
     }
 }
 
-var flagOpen = false;
-var lastPic;
 var clickTick = 0;
-var prevNum;
+var prevNum = -1;
 
 function squareClick(number) {
-
-    var currentPic = "url('images/" + picArray[number] + ".png')";
+    if (number == prevNum) {
+        //closePic(number);
+        return;
+    }
+    if (winArray.indexOf(number) != -1) {
+        return;
+    }
     if (clickTick == 0) {
         clickTick++;
-        openPic(number, currentPic);
-        lastPick = currentPic;
+        openPic(number);
         prevNum = number;
     } else {
         clickTick--;
-        openPic(number, currentPic);
+        openPic(number);
         
         if (picArray[number] != picArray[prevNum]) {
             setTimeout(closePictures, 1000, number, prevNum);
         } else {
             alert('Yes');
+            winArray.push(number);
+            winArray.push(prevNum);
         }
+        prevNum = -1;
     }
 }
 
@@ -41,8 +46,8 @@ function closePictures(number, prevNum) {
     closePic(prevNum);
 }
 
-function openPic(number, pic) {
-    document.getElementById('sq' + number).style.backgroundImage = pic;
+function openPic(number) {
+    document.getElementById('sq' + number).style.backgroundImage = "url('images/" + picArray[number] + ".png')";
     document.getElementById('sq' + number).style.backgroundSize = "100% 100%";
 }
 
